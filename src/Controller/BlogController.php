@@ -2,31 +2,30 @@
 namespace App\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use App\Entity\Article;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\Response;
 
 class BlogController extends AbstractController
 {
   /**
-   * @Route("/", name="index")
+   * @Route("/", name="homepage")
    */
-   public function index(): Response
+   public function indexAction(): Response
    {
-     return $this->render('index.html.twig', []);
+      $repository = $this->getDoctrine()->getRepository(Article::class);
+      $articles = $repository->find10lastArticles();
+     return $this->render('index.html.twig', ['articles' => $articles]);
    }
 
    /**
-    * @Route("/post/{id}", name="view_post")
+    * @Route("/post/{url}", name="view_post")
     */
-    public function view_post(int $id): Response
+    public function view_post(string $url): Response
     {
-      $articles = [["title" => "Titre de l'article", "description" => "Description de l'article",
-      "date" => "5 Novembre 2020", "body" => "Cet article est une présentation d'un article. C'est un petit exemple de test tout pourri mais bon faut bien commencer quelque part. :)","genre" => " Test"],
-      ["title" => "Titre de l'article 2", "description" => "Description de l'article",
-      "date" => "5 Octorbre 2020", "body" => "Cet article est une présentation d'un article. C'est un petit exemple de test tout pourri mais bon faut bien commencer quelque part. :)","genre" => " Test"],
-      ["title" => "Titre de l'article 3", "description" => "Description de l'article",
-      "date" => "4 Novembre 2020", "body" => "Cet article est une présentation d'un article. C'est un petit exemple de test tout pourri mais bon faut bien commencer quelque part. :)","genre" => " Test"]];
-      return $this->render('post.html.twig',['id' => $id, 'articles' => $articles]);
+     $repository = $this->getDoctrine()->getRepository(Article::class);
+     $article = $repository->findArticleByUrlAlias($url);
+      return $this->render('post.html.twig',['article' => $article]);
     }
 }
 

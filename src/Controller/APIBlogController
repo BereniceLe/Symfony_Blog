@@ -1,0 +1,32 @@
+<?php
+namespace App\Controller;
+
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use App\Entity\Article;
+use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\HttpFoundation\Response;
+
+class APIBlogController extends AbstractController
+{
+  /**
+   * @Route("/api/articles", name="articles", methods={"GET"})
+   */
+   public function index(EntityManagerInterface $em): JsonResponse
+   {
+      $articles = $em->getRepository(Article::class)->findAll();
+      
+      $serializedArticles = [];
+      foreach ($articles as $article){
+        $serializedArticles[] = [
+          'id' => $article->getId(),
+          'title' => $article->getTitle(),
+          'url_alias' => $article->getUrl(),
+          'content' => $article->getContent(),
+          'publication_date' => $article->getPublished(),
+        ];
+      }
+      return new JsonResponse(['data' => $serializedArticles, 'items' => count($serializedArticles)]);
+   }
+}
+
+?>
