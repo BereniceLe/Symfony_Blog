@@ -25,7 +25,7 @@ class Article
     /**
      * @ORM\Column(type="string", length=255)
      */
-    private $url;
+    private $slug;
 
     /**
      * @ORM\Column(type="text")
@@ -48,9 +48,9 @@ class Article
         return $this->title;
     }
 
-    public function getUrl(): string
+    public function getSlug(): string
     {
-        return $this->url;
+        return $this->slug;
     }
 
     public function getContent(): string
@@ -71,9 +71,9 @@ class Article
         return $this;
     }
 
-    public function setUrl(string $url): self
+    public function setSlug(string $slug): self
     {
-        $this->url = $url;
+        $this->slug = $slug;
 
         return $this;
     }
