@@ -33,13 +33,13 @@ class ArticleRepository extends ServiceEntityRepository
     }
     
     /**
-     * @return Article Returns an Article objects where url = url
+     * @return Article Returns an Article objects where slug = url
      */
     
     public function findArticleByUrlAlias(string $url) : object
     {
         return $this->createQueryBuilder('a')
-            ->andWhere('a.url = :val')
+            ->andWhere('a.slug = :val')
             ->setParameter('val', $url)
             ->getQuery()
             ->getOneOrNullResult();

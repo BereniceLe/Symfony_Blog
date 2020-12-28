@@ -12,6 +12,7 @@ use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 use Symfony\Component\Validator\Validator\ValidatorInterface;
+use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
 
 class BlogController extends AbstractController
 {
@@ -64,6 +65,30 @@ class BlogController extends AbstractController
 
 		return $this->render('form.html.twig',['form' => $form->createView()]);
 	}
+
+	/**
+     * @Route("/login", name="login")
+     */
+    public function login(AuthenticationUtils $authenticationUtils): Response
+    {
+        // if ($this->getUser()) {
+        //     return $this->redirectToRoute('target_path');
+        // }
+
+        // get the login error if there is one
+        $error = $authenticationUtils->getLastAuthenticationError();
+        // last username entered by the user
+        $lastUsername = $authenticationUtils->getLastUsername();
+        $form = $this->createFormBuilder()
+						->add('email', TextType::class)
+						->add('password', PasswordType::class)
+						->add('create', SubmitType::class, ['label'=>'S\'inscrire'])
+						->getForm();
+		$form->handleRequest($request);
+
+
+        return $this->render('form.html.twig', ['form' => $form->createView(), 'last_username' => $lastUsername, 'error' => $error]);
+    }
 }
 
 ?>
