@@ -2,19 +2,43 @@
 <html>
     <head>
         <meta charset="UTF-8">
+
         <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
         <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway">
         <link rel="stylesheet" href="{{ asset('css/main.css') }}">
-        <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
-        
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+                
         <title>{% block title %}Welcome!{% endblock %}</title>
         {% block stylesheets %}{% endblock %}
     </head>
     <body>
-      <style>
+       <nav class="navbar navbar-inverse">
+          <div class="container-fluid">
+            <div class="navbar-header">
+              <a class="navbar-brand" href="/">WumpusBlog</a>
+            </div>
+            <ul class="nav navbar-nav">
+              <li class="active"><a href="/">Home</a></li>
+              {% if app.user %}
+              <li class="active"><a href="/addarticle">Ajout</a></li>
+              {% endif %}
+            </ul>
+            <ul class="nav navbar-nav navbar-right">
+            {% if app.user %}
+              <li><a href="/logout"><span class="glyphicon glyphicon-log-in"></span>  Déconnexion</a></li>
+            {% else %}
+              <li><a href="/adduser"><span class="glyphicon glyphicon-user"></span>  Inscription</a></li>
+              <li><a href="/login"><span class="glyphicon glyphicon-log-in"></span>    Connexion</a></li>     
+            {% endif %}
+            </ul>
+          </div>
+        </nav> 
+      <!--style>
       body,h1,h2,h3,h4,h5,h6 {font-family: "Karma", sans-serif}
       .w3-bar-block .w3-bar-item {padding:20px}
-      </style>
+      </style-->
         {% block body %}{% endblock %}
         {% block javascripts %}{% endblock %}
     </body>

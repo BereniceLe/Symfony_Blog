@@ -13,6 +13,7 @@ use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 use Symfony\Component\Validator\Validator\ValidatorInterface;
 use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
+use Symfony\Component\Validator\Constraints\DateTime;
 
 class BlogController extends AbstractController
 {
@@ -39,7 +40,7 @@ class BlogController extends AbstractController
 	/**
 	* @Route("/adduser", name="addUser")
 	*/
-	public function addUserForm(Request $request, UserPasswordEncoderInterface $encoder) : Response
+	public function addUser(Request $request, UserPasswordEncoderInterface $encoder) : Response
 	{
 		
 		$user = new User();
@@ -55,11 +56,11 @@ class BlogController extends AbstractController
 				$entityManager = $this->getDoctrine()->getManager();
 				$hash = $encoder->encodePassword($user,$user->getPassword());
 				$user->setRoles($user->getRoles());
-        $user->setPassword($hash);
+		        $user->setPassword($hash);
 
-       	$entityManager->persist($user);
-        $entityManager->flush();
-        return $this->redirectToRoute('homepage');       
+		       	$entityManager->persist($user);
+		        $entityManager->flush();
+		        return $this->redirectToRoute('homepage');       
 		}
         
 
@@ -67,28 +68,50 @@ class BlogController extends AbstractController
 	}
 
 	/**
-     * @Route("/login", name="login")
-     */
-    public function login(AuthenticationUtils $authenticationUtils): Response
-    {
-        // if ($this->getUser()) {
-        //     return $this->redirectToRoute('target_path');
-        // }
-
-        // get the login error if there is one
-        $error = $authenticationUtils->getLastAuthenticationError();
-        // last username entered by the user
-        $lastUsername = $authenticationUtils->getLastUsername();
-        $form = $this->createFormBuilder()
-						->add('email', TextType::class)
-						->add('password', PasswordType::class)
-						->add('create', SubmitType::class, ['label'=>'S\'inscrire'])
+	* @Route("/addarticle", name="addArticle")
+	*/
+	public function addArticle(Request $request, UserPasswordEncoderInterface $encoder) : Response
+	{
+		
+		$article = new Article();
+		$form = $this->createFormBuilder($article)
+						->add('title', TextType::class)
+						->add('content', TextType::class)
+						->add('create', SubmitType::class, ['label'=>'Ajouter'])
 						->getForm();
 		$form->handleRequest($request);
 
+		
+		if($form->isSubmitted() && $form->isValid()){
+				$entityManager = $this->getDoctrine()->getManager();
+				$mydate = getdate(date("U"));
+				$date = "$mydate[year]-$mydate[mon]-$mydate[mday]";
+				$article->setPublished($date);
+				$article->setSlug($article->getTitle()); // A CHANGER TODO
+				
 
-        return $this->render('form.html.twig', ['form' => $form->createView(), 'last_username' => $lastUsername, 'error' => $error]);
-    }
+       	$entityManager->persist($article);
+        $entityManager->flush();
+        return $this->redirectToRoute('homepage');       
+		}
+        
+
+		return $this->render('newArticles.html.twig',['form' => $form->createView()]);
+	}
+
+
+	/**
+	* @Route("/remove/{slug}", name="deleteArticle")
+	*/
+	public function deleteArticle(string $slug): Response
+	{
+		$repository = $this->getDoctrine()->getRepository(Article::class);
+		$article = $repository->findArticleByUrlAlias($slug);
+		$entityManager = $this->getDoctrine()->getManager();
+		$entityManager->remove($article);
+		$entityManager->flush();
+		return $this->redirectToRoute('homepage'); 
+	}
 }
 
 ?>

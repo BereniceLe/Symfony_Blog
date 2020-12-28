@@ -87,7 +87,7 @@ class Article
 
     public function setPublished(string $publication): self
     {
-        $this->published = $publication;
+        $this->published = new \DateTime($publication);
 
         return $this;
     }

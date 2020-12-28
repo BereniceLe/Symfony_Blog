@@ -33,7 +33,7 @@ class ArticleRepository extends ServiceEntityRepository
     }
     
     /**
-     * @return Article Returns an Article objects where slug = url
+     * @return Article Returns an Article objects where slug = $url
      */
     
     public function findArticleByUrlAlias(string $url) : object
@@ -44,6 +44,7 @@ class ArticleRepository extends ServiceEntityRepository
             ->getQuery()
             ->getOneOrNullResult();
     }
+
 
 
     /*

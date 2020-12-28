@@ -5,6 +5,15 @@
 	position: center;
 }
 
+.delete{
+	float: right;
+	color: red;
+}
+
+.articles{
+	margin-left: 5%;
+	margin-right: 5%;
+}
 
 
 h2{
