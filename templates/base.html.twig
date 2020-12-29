@@ -10,7 +10,7 @@
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
                 
-        <title>{% block title %}Welcome!{% endblock %}</title>
+        <title>{% block title %}WumpusBlog{% endblock %}</title>
         {% block stylesheets %}{% endblock %}
     </head>
     <body>
@@ -36,6 +36,7 @@
       body,h1,h2,h3,h4,h5,h6 {font-family: "Karma", sans-serif}
       .w3-bar-block .w3-bar-item {padding:20px}
       </style-->
+      <div class="body">
         {% if app.user %}
             <a href="/addarticle" class="add">
                 <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" fill="currentColor" class="bi bi-plus-circle" viewBox="0 0 16 16">
@@ -44,7 +45,10 @@
                 </svg>
             </a>
         {% endif %}
+
         {% block body %}{% endblock %}
-        {% block javascripts %}{% endblock %}
+        {% block javascripts %}{% endblock %}        
+      </div>
+        
     </body>
 </html>

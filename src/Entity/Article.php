@@ -4,6 +4,7 @@ namespace App\Entity;
 
 use App\Repository\ArticleRepository;
 use Doctrine\ORM\Mapping as ORM;
+use Gedmo\Mapping\Annotation as Gedmo;
 
 /**
  * @ORM\Entity(repositoryClass=ArticleRepository::class)
@@ -24,6 +25,7 @@ class Article
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Gedmo\Slug(fields={"title"})
      */
     private $slug;
 
@@ -33,6 +35,7 @@ class Article
     private $content;
 
     /**
+     * @Gedmo\Timestampable(on="update")
      * @ORM\Column(type="date", length=10)
      */
     private $published;

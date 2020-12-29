@@ -3,22 +3,19 @@
 
 
 {% block body %}
-<div class="container form">
-	<div class="row">
-		<div class="col-xs-12">
-			<h1>Inscription</h1>
-			{{ form_start(form)}}
-				{{ form_errors(form)}}
+<div class="formulaireL">
 
-				{{ form_row(form.email)}}
+	<h1 class="form_title">Inscrivez-vous</h1>
+	{{ form_start(form)}}
+	{{ form_errors(form)}}
 
-				{{ form_row(form.password)}}
+	{{ form_row(form.email)}}
 
-				{{ form_row(form.create, {'label' : 'Submit me'})}}
+	{{ form_row(form.password)}}
 
-			{{ form_end(form)}}
-		</div>
-	</div>
+	{{ form_row(form.create, {'label' : 'Inscription'})}}
+
+	{{ form_end(form)}}
 </div>
 
 {% endblock %}

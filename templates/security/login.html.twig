@@ -3,29 +3,32 @@
 {% block title %}Connexion{% endblock %}
 
 {% block body %}
-<div class="container form">
-    <div class="row">
-        <div class="col-xs-12">
-            <form method="post">
-                {% if error %}
-                    <div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
-                {% endif %}
+<div class="formulaireL">
+    <form method="post">
+        {% if error %}
+        <div class="form-group">
+            <div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
+        </div>
+        {% endif %}
 
-                {% if app.user %}
-                    <div class="mb-3">
-                        You are logged in as {{ app.user.username }}, <a href="{{ path('app_logout') }}">Logout</a>
-                    </div>
-                {% endif %}
+        {% if app.user %}
+            <div class="mb-3">
+                You are logged in as {{ app.user.username }}, <a href="{{ path('app_logout') }}">Logout</a>
+            </div>
+        {% endif %}
 
-                <h1 class="h3 mb-3 font-weight-normal">Enregistrez-vous</h1>
-                <label for="inputEmail">Email</label>
-                <input type="email" value="{{ last_username }}" name="email" id="inputEmail" class="form-control" required autofocus>
-                <label for="inputPassword">Password</label>
-                <input type="password" name="password" id="inputPassword" class="form-control" required>
+        <h1 class="form_title">Connectez-vous</h1>
 
-                <input type="hidden" name="_csrf_token"
-                       value="{{ csrf_token('authenticate') }}"
-                >
+        <div class="form-group">
+            <label for="inputEmail">Email</label>
+            <input type="email" value="{{ last_username }}" name="email" id="inputEmail" class="form-control" required autofocus>
+        </div>
+        <div class="form-group">
+            <label for="inputPassword">Password</label>
+            <input type="password" name="password" id="inputPassword" class="form-control" required>
+        </div>
+
+        <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
 
                 {#
                     Uncomment this section and add a remember_me option below your firewall to activate remember me functionality.
@@ -37,12 +40,9 @@
                         </label>
                     </div>
                 #}
-
-                <button class="btn btn-lg btn-primary" type="submit">
-                    Connexion
-                </button>
-            </form>
+        <div class="form-group">
+            <button class="btn-primary btn" type="submit">Connexion</button>
         </div>
-    </div>
+    </form>
 </div>
 {% endblock %}

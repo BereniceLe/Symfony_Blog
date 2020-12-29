@@ -78,8 +78,8 @@ class BlogController extends AbstractController
 
 		$article = new Article();
 		$form = $this->createFormBuilder($article)
-						->add('title', TextType::class)
-						->add('content', TextareaType::class)
+						->add('title', TextType::class, ['lable' => "Titre"])
+						->add('content', TextareaType::class,  ['attr' => ['class' => 'formcontent', 'rows' => 10], 'label' => 'Contenu' ])
 						->add('create', SubmitType::class, ['label'=>'Ajouter'])
 						->getForm();
 		$form->handleRequest($request);
@@ -89,9 +89,7 @@ class BlogController extends AbstractController
 				$entityManager = $this->getDoctrine()->getManager();
 				$mydate = getdate(date("U"));
 				$date = "$mydate[year]-$mydate[mon]-$mydate[mday]";
-				$article->setPublished($date);
-				$article->setSlug($article->getTitle()); // A CHANGER TODO
-				
+				$article->setPublished($date);				
 
 		       	$entityManager->persist($article);
 		        $entityManager->flush();
@@ -134,8 +132,8 @@ class BlogController extends AbstractController
 		// On crée le formulaire 
 		$articleNew = new Article();
 		$form = $this->createFormBuilder($articleNew)
-						->add('title', TextType::class, ['data' => $article->getTitle()])
-						->add('content', TextareaType::class, ['data' => $article->getContent()])
+						->add('title', TextType::class, ['data' => $article->getTitle(), 'label' => 'Titre'])
+						->add('content', TextareaType::class, ['data' => $article->getContent(),'attr' => ['class' => 'formcontent', 'rows' => 10], 'label' => 'Contenu'])
 						->add('create', SubmitType::class, ['label'=>'Modifier'])
 						->getForm();
 		$form->handleRequest($request);
@@ -150,7 +148,7 @@ class BlogController extends AbstractController
 		
 
 	
-		return $this->render('newArticles.html.twig',['form' => $form->createView()]);
+		return $this->render('updateArticles.html.twig',['form' => $form->createView()]);
 	}
 }
 

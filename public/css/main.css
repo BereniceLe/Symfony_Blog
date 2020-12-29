@@ -1,18 +1,39 @@
-.form{
-	display: flex;
-	justify-content: center;
-	align-items: center;
-	position: center;
+.body{
+	width: 100%;
+	height: 100%;
+	vertical-align: middle;
+}
+
+.form_title{
+	text-align: center;
+}
+
+.formulaire{
+	margin-left: 10%;
+	margin-right: 10%;
+}
+
+.formulaireL{
+	margin-left: 30%;
+	margin-right: 30%;
 }
 
 .delete{
 	float: right;
 	color: red;
+	margin-left: 5px;
+}
+.modify{
+	float: right;
 }
 
 .articles{
 	margin-left: 5%;
 	margin-right: 5%;
+}
+
+.puttomiddle{
+	vertical-align: middle;
 }
 
 .add{
@@ -21,7 +42,15 @@
 	right: 15px;
 }
 
-h2{
-	text-align: center;
+.removehover:hover{
+	text-decoration:none;
+}
+
+.formcontent{
+	width: 70%;
+	height: 70%;
+}
+
+.blog{
 	color : blue;
 }
