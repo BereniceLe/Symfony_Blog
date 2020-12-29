@@ -21,9 +21,6 @@
             </div>
             <ul class="nav navbar-nav">
               <li class="active"><a href="/">Home</a></li>
-              {% if app.user %}
-              <li class="active"><a href="/addarticle">Ajout</a></li>
-              {% endif %}
             </ul>
             <ul class="nav navbar-nav navbar-right">
             {% if app.user %}
@@ -39,6 +36,14 @@
       body,h1,h2,h3,h4,h5,h6 {font-family: "Karma", sans-serif}
       .w3-bar-block .w3-bar-item {padding:20px}
       </style-->
+        {% if app.user %}
+            <a href="/addarticle" class="add">
+                <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" fill="currentColor" class="bi bi-plus-circle" viewBox="0 0 16 16">
+                  <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>
+                  <path d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4z"/>
+                </svg>
+            </a>
+        {% endif %}
         {% block body %}{% endblock %}
         {% block javascripts %}{% endblock %}
     </body>

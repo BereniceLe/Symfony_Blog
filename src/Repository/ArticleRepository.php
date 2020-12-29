@@ -33,6 +33,19 @@ class ArticleRepository extends ServiceEntityRepository
     }
     
     /**
+     * @return Article[] Returns an array of the last 10 Article objects
+     */
+    
+    public function find5lastArticles() : array
+    {
+        return $this->createQueryBuilder('a')
+            ->orderBy('a.published', 'DESC')
+            ->setMaxResults(5)
+            ->getQuery()
+            ->getResult();
+    }
+
+    /**
      * @return Article Returns an Article objects where slug = $url
      */
     
@@ -44,7 +57,6 @@ class ArticleRepository extends ServiceEntityRepository
             ->getQuery()
             ->getOneOrNullResult();
     }
-
 
 
     /*

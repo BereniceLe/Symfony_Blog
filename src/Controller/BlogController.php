@@ -9,6 +9,7 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Form\Extension\Core\Type\PasswordType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
+use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 use Symfony\Component\Validator\Validator\ValidatorInterface;
@@ -72,11 +73,13 @@ class BlogController extends AbstractController
 	*/
 	public function addArticle(Request $request, UserPasswordEncoderInterface $encoder) : Response
 	{
-		
+		// On vérifie l'autorisation
+		$this->denyAccessUnlessGranted('ROLE_USER');
+
 		$article = new Article();
 		$form = $this->createFormBuilder($article)
 						->add('title', TextType::class)
-						->add('content', TextType::class)
+						->add('content', TextareaType::class)
 						->add('create', SubmitType::class, ['label'=>'Ajouter'])
 						->getForm();
 		$form->handleRequest($request);
@@ -90,9 +93,9 @@ class BlogController extends AbstractController
 				$article->setSlug($article->getTitle()); // A CHANGER TODO
 				
 
-       	$entityManager->persist($article);
-        $entityManager->flush();
-        return $this->redirectToRoute('homepage');       
+		       	$entityManager->persist($article);
+		        $entityManager->flush();
+		        return $this->redirectToRoute('homepage');       
 		}
         
 
@@ -105,12 +108,49 @@ class BlogController extends AbstractController
 	*/
 	public function deleteArticle(string $slug): Response
 	{
+		// On vérifie l'autorisation
+		$this->denyAccessUnlessGranted('ROLE_ADMIN');
+
 		$repository = $this->getDoctrine()->getRepository(Article::class);
 		$article = $repository->findArticleByUrlAlias($slug);
 		$entityManager = $this->getDoctrine()->getManager();
 		$entityManager->remove($article);
 		$entityManager->flush();
 		return $this->redirectToRoute('homepage'); 
+	}
+
+	/**
+	* @Route("/update/{slug}", name="updateArticle")
+	*/
+	public function updateArticle(Request $request, string $slug): Response
+	{
+		// On vérifie l'autorisation
+		$this->denyAccessUnlessGranted('ROLE_ADMIN');
+
+		$repository = $this->getDoctrine()->getRepository(Article::class);
+		$article = $repository->findArticleByUrlAlias($slug);
+		$entityManager = $this->getDoctrine()->getManager();
+
+		// On crée le formulaire 
+		$articleNew = new Article();
+		$form = $this->createFormBuilder($articleNew)
+						->add('title', TextType::class, ['data' => $article->getTitle()])
+						->add('content', TextareaType::class, ['data' => $article->getContent()])
+						->add('create', SubmitType::class, ['label'=>'Modifier'])
+						->getForm();
+		$form->handleRequest($request);
+		// Le formulaire est envoyé 
+
+		if($form->isSubmitted() && $form->isValid()){
+			$article->setTitle($articleNew->getTitle());
+			$article->setContent($articleNew->getContent());
+			$entityManager->flush();
+		    return $this->redirectToRoute('view_post', array('slug' => $slug));       
+		}
+		
+
+	
+		return $this->render('newArticles.html.twig',['form' => $form->createView()]);
 	}
 }
 
