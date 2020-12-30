@@ -41,7 +41,9 @@
         "symfony/yaml": "5.1.*",
         "twig/extra-bundle": "^2.12|^3.0",
         "twig/string-extra": "^3.1",
-        "twig/twig": "^2.12|^3.0"
+        "twig/twig": "^2.12|^3.0",
+        "ext-pdo_sqlite": "*",
+        "ext-sqlite3": "*"
     },
     "require-dev": {
         "symfony/browser-kit": "^5.1",
