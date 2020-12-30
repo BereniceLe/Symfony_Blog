@@ -78,7 +78,7 @@ class BlogController extends AbstractController
 
 		$article = new Article();
 		$form = $this->createFormBuilder($article)
-						->add('title', TextType::class, ['lable' => "Titre"])
+						->add('title', TextType::class, ['label' => "Titre"])
 						->add('content', TextareaType::class,  ['attr' => ['class' => 'formcontent', 'rows' => 10], 'label' => 'Contenu' ])
 						->add('create', SubmitType::class, ['label'=>'Ajouter'])
 						->getForm();
