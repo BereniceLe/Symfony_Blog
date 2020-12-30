@@ -3,7 +3,9 @@
 	height: 100%;
 	vertical-align: middle;
 }
-
+.about{
+	margin-left: 20%;
+}
 .form_title{
 	text-align: center;
 }
@@ -52,5 +54,5 @@
 }
 
 .blog{
-	color : blue;
+	color : ;
 }

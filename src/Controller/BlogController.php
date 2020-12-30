@@ -48,7 +48,7 @@ class BlogController extends AbstractController
 		$form = $this->createFormBuilder($user)
 						->add('email', TextType::class)
 						->add('password', PasswordType::class)
-						->add('create', SubmitType::class, ['label'=>'S\'inscrire'])
+						->add('create', SubmitType::class, ['label'=>'Sign in'])
 						->getForm();
 		$form->handleRequest($request);
 
@@ -78,9 +78,9 @@ class BlogController extends AbstractController
 
 		$article = new Article();
 		$form = $this->createFormBuilder($article)
-						->add('title', TextType::class, ['label' => "Titre"])
-						->add('content', TextareaType::class,  ['attr' => ['class' => 'formcontent', 'rows' => 10], 'label' => 'Contenu' ])
-						->add('create', SubmitType::class, ['label'=>'Ajouter'])
+						->add('title', TextType::class, ['label' => "Title"])
+						->add('content', TextareaType::class,  ['attr' => ['class' => 'formcontent', 'rows' => 10], 'label' => 'Content' ])
+						->add('create', SubmitType::class, ['label'=>'Add article'])
 						->getForm();
 		$form->handleRequest($request);
 
@@ -132,9 +132,9 @@ class BlogController extends AbstractController
 		// On crée le formulaire 
 		$articleNew = new Article();
 		$form = $this->createFormBuilder($articleNew)
-						->add('title', TextType::class, ['data' => $article->getTitle(), 'label' => 'Titre'])
-						->add('content', TextareaType::class, ['data' => $article->getContent(),'attr' => ['class' => 'formcontent', 'rows' => 10], 'label' => 'Contenu'])
-						->add('create', SubmitType::class, ['label'=>'Modifier'])
+						->add('title', TextType::class, ['data' => $article->getTitle(), 'label' => 'Title'])
+						->add('content', TextareaType::class, ['data' => $article->getContent(),'attr' => ['class' => 'formcontent', 'rows' => 10], 'label' => 'Content'])
+						->add('create', SubmitType::class, ['label'=>'Update'])
 						->getForm();
 		$form->handleRequest($request);
 		// Le formulaire est envoyé 
@@ -149,6 +149,15 @@ class BlogController extends AbstractController
 
 	
 		return $this->render('updateArticles.html.twig',['form' => $form->createView()]);
+	}
+
+	/**
+	* @Route("/about", name="about")
+	*/
+	public function about(): Response
+	{
+
+		return $this->render('about.html.twig');
 	}
 }
 

@@ -3,7 +3,7 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-  <h1 class="form_title blog">WumpusBlog</h1>
+  <h1 class="form_title blog">SmallLibraryBlog</h1>
   
   <div class="articles">
   {% for article in articles %}
@@ -21,7 +21,7 @@
       </a>
       {% endif %}
       </h3>
-      <h5>Description simple <span class="w3-opacity">{{ article.published }}</span></h5>
+      <h5>Published <span class="w3-opacity">{{ article.published }}</span></h5>
     </div>
 
     <div class="w3-container">
@@ -30,7 +30,7 @@
         <div class="w3-col m8 s12">
           <p>
             <a href="/post/{{article.slug}}" class="w3-button w3-white w3-border removehover">
-              <b class="puttomiddle">LIRE PLUS
+              <b class="puttomiddle">READ MORE
                 
               </b>
                 <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-caret-right puttomiddle" viewBox="0 0 16 16">

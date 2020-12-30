@@ -13,11 +13,11 @@
 
         {% if app.user %}
             <div class="mb-3">
-                You are logged in as {{ app.user.username }}, <a href="{{ path('app_logout') }}">Logout</a>
+                You are logged in as {{ app.user.username }}, <a href="{{ path('app_logout') }}">Log out</a>
             </div>
         {% endif %}
 
-        <h1 class="form_title">Connectez-vous</h1>
+        <h1 class="form_title">LOG IN</h1>
 
         <div class="form-group">
             <label for="inputEmail">Email</label>
@@ -41,7 +41,7 @@
                     </div>
                 #}
         <div class="form-group">
-            <button class="btn-primary btn" type="submit">Connexion</button>
+            <button class="btn-primary btn" type="submit">Log in</button>
         </div>
     </form>
 </div>
