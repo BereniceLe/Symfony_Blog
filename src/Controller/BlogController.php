@@ -79,6 +79,7 @@ class BlogController extends AbstractController
 		$article = new Article();
 		$form = $this->createFormBuilder($article)
 						->add('title', TextType::class, ['label' => "Title"])
+						->add('author', TextType::class, ['label' => "Author"])
 						->add('content', TextareaType::class,  ['attr' => ['class' => 'formcontent', 'rows' => 10], 'label' => 'Content' ])
 						->add('create', SubmitType::class, ['label'=>'Add article'])
 						->getForm();
@@ -133,6 +134,7 @@ class BlogController extends AbstractController
 		$articleNew = new Article();
 		$form = $this->createFormBuilder($articleNew)
 						->add('title', TextType::class, ['data' => $article->getTitle(), 'label' => 'Title'])
+						->add('author', TextType::class, ['data' => $article->getAuthor(), 'label' => 'Author'])
 						->add('content', TextareaType::class, ['data' => $article->getContent(),'attr' => ['class' => 'formcontent', 'rows' => 10], 'label' => 'Content'])
 						->add('create', SubmitType::class, ['label'=>'Update'])
 						->getForm();
@@ -158,6 +160,16 @@ class BlogController extends AbstractController
 	{
 
 		return $this->render('about.html.twig');
+	}
+
+		/**
+	* @Route("/othersblog", name="othersBlog")
+	*/
+	public function othersBlog(): Response
+	{
+		$url = 'http://chailly-dejesusmartins-blog.herokuapp.com/api/articles.json';
+		$articles = array_slice(json_decode(file_get_contents($url), true), 0, 5, true);;
+		return $this->render('othersBlog.html.twig', ['articles' => $articles]);
 	}
 }
 

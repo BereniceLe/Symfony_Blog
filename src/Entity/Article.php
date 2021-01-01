@@ -34,6 +34,11 @@ class Article
      */
     private $content;
 
+        /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $author;
+
     /**
      * @Gedmo\Timestampable(on="update")
      * @ORM\Column(type="date", length=10)
@@ -61,6 +66,11 @@ class Article
         return $this->content;
     }
 
+    public function getAuthor(): string
+    {
+        return $this->author;
+    }
+
     public function getPublished(): string
     {
         return $this->published->format('Y/m/d');
@@ -84,6 +94,13 @@ class Article
     public function setContent(string $content): self
     {
         $this->content = $content;
+
+        return $this;
+    }
+
+    public function setAuthor(string $author): self
+    {
+        $this->author = $author;
 
         return $this;
     }

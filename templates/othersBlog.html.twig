@@ -1,0 +1,34 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+  <h1 class="form_title blog">SmallLibraryBlog : </h1>
+  <h2 class="form_title blog">Articles fetched from Chailly-Dejesusmartins's Blog </h2>
+  
+  <div class="articles">
+  {% for article in articles %}
+  <div class="w3-card-4 w3-margin w3-white">
+
+    <div class="w3-container">
+
+      <h3><b>{{ article.title }}</b>
+      </h3>
+      <h5>Published <span class="w3-opacity">{{ article.published }}</span></h5>
+      <h5>Author <span class="w3-opacity">{{ article.author.username }}</span></h5>
+    </div>
+
+    <div class="w3-container">
+      <p>{{ article.content | raw}}</p>
+      <div class="w3-row">
+        <div class="w3-col m8 s12">
+          <p></p>
+        </div>
+        <div class="w3-col m4 w3-hide-small">
+          <p></p>
+        </div>
+      </div>
+    </div>
+  </div>
+  {% endfor %}
+  </div>
+
+{% endblock %}
