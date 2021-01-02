@@ -25,6 +25,27 @@
 		margin-bottom: 0px;
 	}
 
+	.formulaire{
+		margin-left: 5%;
+		margin-right: 5%;
+		margin-top: 10%;
+	}
+
+	.formulaireL{
+		margin-left: 5%;
+		margin-right: 5%;
+		margin-top: 20%;
+	}
+
+	.articles{
+		margin-left: .5%;
+		margin-right: .5%;
+	}
+
+	.add{
+		background-color: white; 
+		border-radius: 25px;
+	}
 
 }
 
@@ -37,6 +58,27 @@
 	.tel{
         display:none;
     }
+
+    .formulaire{
+		margin-left: 10%;
+		margin-right: 10%;
+		margin-top: 3%;
+	}
+
+	.formulaireL{
+		margin-left: 30%;
+		margin-right: 30%;
+		margin-top: 10%;
+	}
+	.articles{
+		margin-left: 5%;
+		margin-right: 5%;
+	}
+}
+
+.h1, .h2, .h3, .h4, .h5, .h6, h1, h2, h3, h4, h5, h6 {
+    font-family: Jazz LET, fantasy !important;
+
 }
 
 .body{
@@ -49,16 +91,7 @@
 }
 .form_title{
 	text-align: center;
-}
-
-.formulaire{
-	margin-left: 10%;
-	margin-right: 10%;
-}
-
-.formulaireL{
-	margin-left: 30%;
-	margin-right: 30%;
+	color : SlateBlue;
 }
 
 .delete{
@@ -68,12 +101,9 @@
 }
 .modify{
 	float: right;
+	color : SlateBlue;
 }
 
-.articles{
-	margin-left: 5%;
-	margin-right: 5%;
-}
 
 .puttomiddle{
 	vertical-align: middle;
@@ -83,6 +113,7 @@
 	position: fixed;
 	bottom: 25px;
 	right: 15px;
+	color : SlateBlue;
 }
 
 .removehover:hover{
@@ -95,6 +126,7 @@
 }
 
 .blog{
-	color : gray;
+	color : SlateBlue;
+	font-weight: bold;
 }
 
