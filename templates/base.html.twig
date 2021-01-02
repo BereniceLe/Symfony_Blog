@@ -19,28 +19,30 @@
           <div class="container-fluid">
             <div class="navbar-header">
               <a class="navbar-brand" href="/">SmallLibraryBlog</a>
-              {% if not app.user %}
               <div class="tel">
-	              <a href="/login"><span class="glyphicon glyphicon-log-in login"></span></a>
-	              <a href="/adduser"><span class="glyphicon glyphicon-user login"></span></a>
+                {% if not app.user %}
+	               <a href="/login"><span class="glyphicon glyphicon-log-in login"></span></a>
+	               <a href="/adduser"><span class="glyphicon glyphicon-user login"></span></a>
+                {% else %}
+                  <a href="/logout"><span class="glyphicon glyphicon-log-in login"></span></a>
+                {% endif %}
               </div>
-              {% endif %}
             </div>
             <ul class="nav navbar-nav">
               <li class="active"><a href="/">Home</a></li>
               <li class="active"><a href="/othersblog">Others blog articles</a></li>
               <li class="active"><a href="/about">About</a></li>
             </ul>
-            <ul class="nav navbar-nav navbar-right">
+            <div class="ordi nav navbar-nav navbar-right">
+              <ul class="nav navbar-nav navbar-right">
             {% if app.user %}
-              <li><a href="/logout"><span class="glyphicon glyphicon-log-in"></span>  Log out</a></li>
-            {% else %}
-            <div class="ordi">
-              <li><a href="/adduser"><span class="glyphicon glyphicon-user"></span>  Sign in</a></li>
-              <li><a href="/login"><span class="glyphicon glyphicon-log-in"></span>    Log in</a></li>
-          </div>
+                <li><a href="/logout"><span class="glyphicon glyphicon-log-in"></span>  Log out</a></li>
+            {% else %} 
+                <li><a href="/adduser"><span class="glyphicon glyphicon-user"></span>  Sign in</a></li>
+                <li><a href="/login"><span class="glyphicon glyphicon-log-in"></span>    Log in</a></li>
             {% endif %}
-            </ul>
+              </ul>
+            </div>
           </div>
         </nav> 
       <!--style>
