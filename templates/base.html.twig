@@ -2,6 +2,7 @@
 <html>
     <head>
         <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width">
 
         <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
         <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway">
@@ -18,6 +19,11 @@
           <div class="container-fluid">
             <div class="navbar-header">
               <a class="navbar-brand" href="/">SmallLibraryBlog</a>
+              {% if not app.user %}
+              <a href="/login"><span class="glyphicon glyphicon-log-in login"></span></a>
+              <a href="/adduser"><span class="glyphicon glyphicon-user login"></span></a>
+              
+              {% endif %}
             </div>
             <ul class="nav navbar-nav">
               <li class="active"><a href="/">Home</a></li>
@@ -28,8 +34,8 @@
             {% if app.user %}
               <li><a href="/logout"><span class="glyphicon glyphicon-log-in"></span>  Log out</a></li>
             {% else %}
-              <li><a href="/adduser"><span class="glyphicon glyphicon-user"></span>  Sign in</a></li>
-              <li><a href="/login"><span class="glyphicon glyphicon-log-in"></span>    Log in</a></li>     
+              <li class="connexion"><a href="/adduser"><span class="glyphicon glyphicon-user"></span>  Sign in</a></li>
+              <li class="connexion"><a href="/login"><span class="glyphicon glyphicon-log-in"></span>    Log in</a></li>
             {% endif %}
             </ul>
           </div>

@@ -1,3 +1,38 @@
+@media (max-width: 800px) {
+	/** Phones **/
+	body{
+		font-size: 28px;
+	}
+
+	.connexion{
+		visibility: collapse;
+		max-height: 0;
+	}
+
+	.connexionPhone{
+		visibility: visible;
+		max-height: auto;
+	}
+
+	.login{
+		float: right;
+		height: 50px;
+		padding: 15px 15px;
+		font-size: 18px;
+		line-height: 20px;
+		color: #9d9d9d;
+	}
+
+
+}
+
+@media (min-width: 800px){
+	.connexionPhone{
+		visibility: collapse;
+		max-height: 0;
+	}
+}
+
 .body{
 	width: 100%;
 	height: 100%;
@@ -54,5 +89,6 @@
 }
 
 .blog{
-	color : ;
+	color : gray;
 }
+
