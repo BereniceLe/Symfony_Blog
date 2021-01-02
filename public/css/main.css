@@ -4,15 +4,13 @@
 		font-size: 28px;
 	}
 
-	.connexion{
-		visibility: collapse;
-		max-height: 0;
+	.ordi{
+		display:none;
 	}
 
-	.connexionPhone{
-		visibility: visible;
-		max-height: auto;
-	}
+	.tel{
+        display:block;
+    }
 
 	.login{
 		float: right;
@@ -27,10 +25,13 @@
 }
 
 @media (min-width: 800px){
-	.connexionPhone{
-		visibility: collapse;
-		max-height: 0;
+    .ordi{
+		display:block;
 	}
+
+	.tel{
+        display:none;
+    }
 }
 
 .body{

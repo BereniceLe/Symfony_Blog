@@ -20,9 +20,10 @@
             <div class="navbar-header">
               <a class="navbar-brand" href="/">SmallLibraryBlog</a>
               {% if not app.user %}
-              <a href="/login"><span class="glyphicon glyphicon-log-in login"></span></a>
-              <a href="/adduser"><span class="glyphicon glyphicon-user login"></span></a>
-              
+              <div class="tel">
+	              <a href="/login"><span class="glyphicon glyphicon-log-in login"></span></a>
+	              <a href="/adduser"><span class="glyphicon glyphicon-user login"></span></a>
+              </div>
               {% endif %}
             </div>
             <ul class="nav navbar-nav">
@@ -34,8 +35,10 @@
             {% if app.user %}
               <li><a href="/logout"><span class="glyphicon glyphicon-log-in"></span>  Log out</a></li>
             {% else %}
-              <li class="connexion"><a href="/adduser"><span class="glyphicon glyphicon-user"></span>  Sign in</a></li>
-              <li class="connexion"><a href="/login"><span class="glyphicon glyphicon-log-in"></span>    Log in</a></li>
+            <div class="ordi">
+              <li><a href="/adduser"><span class="glyphicon glyphicon-user"></span>  Sign in</a></li>
+              <li><a href="/login"><span class="glyphicon glyphicon-log-in"></span>    Log in</a></li>
+          </div>
             {% endif %}
             </ul>
           </div>
